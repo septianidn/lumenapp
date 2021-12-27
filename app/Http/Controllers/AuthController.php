@@ -9,6 +9,27 @@ use stdClass;
 
 class AuthController extends Controller
 {
+    public function register(Request $request){
+
+        $this->validate($request, [
+            'username' => 'required',
+            'nama' => 'required',
+            'no_hp' => 'required',
+            'email' => 'required|email',
+            'password' => 'required|min:6'
+        ]);
+
+         User::create([
+            'username' => htmlspecialchars(trim($request->username)),
+            'nama' => htmlspecialchars(trim($request->nama)),
+            'email' => htmlspecialchars(trim($request->email)),
+            'no_hp' => htmlspecialchars(trim($request->no_hp)),
+            'password' => htmlspecialchars($request->password)
+        ]);
+
+        return response()->json(['message' => 'Pendaftaran berhasil']);
+    }
+    
     public function login(Request $request)
     {
         $this->validate($request, [
@@ -28,7 +49,7 @@ class AuthController extends Controller
 
         $generateToken = bin2hex(random_bytes(40));
         $user->update([
-            'remember_token' => $generateToken
+            'token' => $generateToken
         ]);
 
         $data = new stdClass;
