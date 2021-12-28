@@ -1,5 +1,6 @@
 <?php
-
+use Illuminate\Support\Facades\DB;
+use Illuminate\Http\Request;
 /** @var \Laravel\Lumen\Routing\Router $router */
 
 use App\Models\User;
@@ -26,6 +27,10 @@ $router->get('/data', function () use ($router) {
 
 $router->post('/register', 'AuthController@register');
 $router->post('/login','AuthController@login');
+
+$router->put('/profil/ubah', 'UserController@ubahProfil');
+
+$router->get('api/barang/{id_kategori}',  'BarangController@index');
 
 
 $router->group(['middleware' => 'auth'], function() use ($router){

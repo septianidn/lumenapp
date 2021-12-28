@@ -19,7 +19,7 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
      * @var array
      */
     protected $fillable = [
-        'nama', 'email', 'password', 'no_hp', 'username'
+        'nama', 'email', 'password', 'no_hp', 'username', 'token'
     ];
 
     /**
@@ -30,4 +30,8 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
     protected $hidden = [
         'password',
     ];
+
+    public function transaksi(){
+        return $this->hasMany(Transaksi::class);
+    }
 }

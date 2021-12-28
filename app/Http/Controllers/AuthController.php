@@ -37,10 +37,10 @@ class AuthController extends Controller
             'password' => 'required|min:6'
         ]);
 
-        $email = $request->input('username');
-        $password = $request->input('password');
+        $username = $request->username;
+        $password = $request->password;
 
-        $user = User::where('username', $email)->first();
+        $user = User::where('username', $username)->first();
         if (!$user) {
             return response()->json(['message' => 'Login failed'], 401);
         }

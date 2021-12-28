@@ -23,4 +23,14 @@ class UserController extends Controller
 
         return response()->json(['message' => 'Pendaftaran pengguna berhasil dilaksanakan']);
     }
+
+    public function ubahProfil(Request $request){
+
+        User::whereToken(auth()->guard('api')->user()->token)->update([
+            'nama' => htmlspecialchars(trim($request->nama)),
+            'no_hp' => htmlspecialchars(trim($request->no_hp))
+        ]);
+
+        return response()->json(['message' => 'Profil berhasil diubah']);
+    }
 }
