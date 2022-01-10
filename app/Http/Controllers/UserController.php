@@ -28,6 +28,8 @@ class UserController extends Controller
 
         User::whereToken(auth()->guard('api')->user()->token)->update([
             'nama' => htmlspecialchars(trim($request->nama)),
+            'email' => htmlspecialchars(trim($request->email)),
+            'username' => htmlspecialchars(trim($request->username)),
             'no_hp' => htmlspecialchars(trim($request->no_hp))
         ]);
 
