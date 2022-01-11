@@ -11,7 +11,7 @@ class UserController extends Controller
     public function register(Request $request){
         $this->validate($request, [
             'email' => 'required|unique:users|email',
-            'password' => 'required|min:6'
+            'password' => 'required|min:5'
         ]);
         $email = $request->input('email');
         $password = Hash::make($request->input('password'));
@@ -34,5 +34,13 @@ class UserController extends Controller
         ]);
 
         return response()->json(['message' => 'Profil berhasil diubah']);
+    }
+
+    public function ubahPassword(Request $request){
+        User::whereToken(auth()->guard('api')->user()->token)->update([
+            'password' => htmlspecialchars($request->password)
+        ]); 
+
+        return response()->json(['message' => 'Password berhasil diubah']);
     }
 }

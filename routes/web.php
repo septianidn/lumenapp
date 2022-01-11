@@ -36,4 +36,5 @@ $router->get('api/barang/{id_kategori}',  'BarangController@index');
 $router->group(['middleware' => 'auth'], function() use ($router){
     $router->post('/logout', 'AuthController@logout');
      $router->put('editProfil', 'UserController@ubahProfil');
+      $router->put('editPassword', 'UserController@ubahPassword');
 });
